@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\QrScanController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,6 +36,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/api/student/{studentId}/stats', [AttendanceController::class, 'studentStats'])->name('api.attendance.student-stats');
         Route::get('/api/range-stats', [AttendanceController::class, 'rangeStats'])->name('api.attendance.range-stats');
     });
+
+    // QR Scan endpoint for sekretaris
+    Route::post('/scan-qr', [QrScanController::class, 'scan']);
 });
 
 require __DIR__.'/auth.php';
