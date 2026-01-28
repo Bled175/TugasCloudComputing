@@ -26,12 +26,22 @@ class UserSeeder extends Seeder
             'role' => 'sekretaris',
         ]);
 
-        // Siswa
-        User::create([
-            'name' => 'Siswa Contoh',
-            'email' => 'siswa@eskul.test',
-            'password' => Hash::make('password'),
-            'role' => 'siswa',
-        ]);
+        // Siswa sample accounts
+        $students = [
+            ['name' => 'Ahmad Fauzi', 'email' => 'ahmad.fauzi@eskul.test'],
+            ['name' => 'Siti Nurhaliza', 'email' => 'siti.nurhaliza@eskul.test'],
+            ['name' => 'Budi Santoso', 'email' => 'budi.santoso@eskul.test'],
+            ['name' => 'Dewi Lestari', 'email' => 'dewi.lestari@eskul.test'],
+            ['name' => 'Eko Prasetyo', 'email' => 'eko.prasetyo@eskul.test'],
+        ];
+
+        foreach ($students as $student) {
+            User::create([
+                'name' => $student['name'],
+                'email' => $student['email'],
+                'password' => Hash::make('password'),
+                'role' => 'siswa',
+            ]);
+        }
     }
 }

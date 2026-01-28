@@ -15,6 +15,7 @@ class Attendance extends Model
         'status',
         'scanned_by',
         'scanned_at',
+        'keterangan',
     ];
 
     protected $casts = [

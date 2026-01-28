@@ -10,6 +10,7 @@ class Student extends Model
     use HasFactory;
 
     protected $fillable = [
+        'nisn',
         'nama',
         'kelas',
         'qr_token',
@@ -33,5 +34,13 @@ class Student extends Model
     public function scopeByQrToken($query, $token)
     {
         return $query->where('qr_token', $token);
+    }
+
+    // ================= ACCESSORS =================
+
+    public function getQrCodeAttribute()
+    {
+        return \SimpleSoftwareIO\QrCode\Facades\QrCode::size(300)
+            ->generate($this->qr_token);
     }
 }

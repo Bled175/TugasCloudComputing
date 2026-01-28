@@ -11,13 +11,26 @@ class StudentSeeder extends Seeder
 {
     public function run(): void
     {
-        $siswaUser = User::where('role', 'siswa')->first();
+        $siswaUsers = User::where('role', 'siswa')->get();
 
-        Student::create([
-            'nama' => 'Ahmad Fauzi',
-            'kelas' => 'XI RPL',
-            'qr_token' => Str::uuid(),
-            'user_id' => $siswaUser->id,
-        ]);
+        $students = [
+            ['nama' => 'Ahmad Fauzi', 'kelas' => 'X-1', 'nisn' => '0001234567'],
+            ['nama' => 'Siti Nurhaliza', 'kelas' => 'X-2', 'nisn' => '0001234568'],
+            ['nama' => 'Budi Santoso', 'kelas' => 'XI-1', 'nisn' => '0001234569'],
+            ['nama' => 'Dewi Lestari', 'kelas' => 'XI-2', 'nisn' => '0001234570'],
+            ['nama' => 'Eko Prasetyo', 'kelas' => 'XII-1', 'nisn' => '0001234571'],
+        ];
+
+        foreach ($siswaUsers as $index => $user) {
+            if (isset($students[$index])) {
+                Student::create([
+                    'user_id' => $user->id,
+                    'nisn' => $students[$index]['nisn'],
+                    'nama' => $students[$index]['nama'],
+                    'kelas' => $students[$index]['kelas'],
+                    'qr_token' => Str::uuid(),
+                ]);
+            }
+        }
     }
 }
